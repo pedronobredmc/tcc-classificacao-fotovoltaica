@@ -1,0 +1,15 @@
+[Unit]
+Description=Emissor do painel fotovoltaico simulado
+Wants=tcc-classificador.service
+After=tcc-classificador.service
+
+[Service]
+User=ec2-user
+WorkingDirectory=/home/ec2-user/tcc
+ExecStart=/home/ec2-user/tcc/.venv/bin/python -u emissor_painel_ec2.py --cenario nominal --semente 2026 --intervalo 1 --saida monitoramento_continuo.csv --retomar
+Restart=on-failure
+RestartSec=5
+SuccessExitStatus=SIGTERM
+
+[Install]
+WantedBy=multi-user.target

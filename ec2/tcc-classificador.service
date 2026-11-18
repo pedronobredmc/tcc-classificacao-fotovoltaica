@@ -1,0 +1,13 @@
+[Unit]
+Description=Classificador fotovoltaico do TCC
+After=network.target
+
+[Service]
+User=ec2-user
+WorkingDirectory=/home/ec2-user/tcc
+ExecStart=/home/ec2-user/tcc/.venv/bin/python -u teste_fluxo_ec2.py servir modelo/random_forest_com_historico.joblib --monitorar-csv monitoramento_continuo.csv
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
